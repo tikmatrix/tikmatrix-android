@@ -1,0 +1,45 @@
+name: Release
+run-name: ${{ github.actor }} is building Release 🚀
+on:
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: write
+jobs:
+  deploy:
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Build APK
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build
+          ./gradlew packageDebugAndroidTest
+          mkdir -p app/build/apk
+          mv app/build/outputs/apk/debug/app-debug.apk app/build/apk/com.github.tikmatrix.apk
+          mv app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk app/build/apk/com.github.tikmatrix.test.apk
+      - name: Upload APK
+        uses: ryand56/r2-upload-action@v1.2.3
+        with:
+          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+          r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          r2-bucket: tikmatrix
+          source-dir: app/build/apk/
+          destination-dir: ./
+      - name: Update Version
+        run: |
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          curl -X PUT https://pro.api.tikmatrix.com/ci/update_core_version \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.API_KEY }}" \
+          -d '{
+            "apk_version": "'"${TAG_NAME}"'",
+            "test_apk_version": "'"${TAG_NAME}"'"
+          }'
+

@@ -1,0 +1,9 @@
+.gradle
+local.properties
+.DS_Store
+build
+captures
+.idea
+app/app.iml
+tikmatrix-android.iml
+*.iml

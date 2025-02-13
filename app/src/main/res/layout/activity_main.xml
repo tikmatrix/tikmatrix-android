@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.github.tikmatrix.MainActivity"
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="@drawable/rounded_corner">
+        <TextView
+            android:id="@+id/product_name"
+            style="@style/CenterTitle"
+            android:text=""/>
+        <TextView
+            android:id="@+id/android_system_version"
+            style="@style/CenterTitle"
+            android:text=""/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner">
+            <TextView
+                style="@style/LeftTitle"
+                android:text="@string/notification_permission" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/notification_permission"
+                android:layout_weight="1"
+                android:checked="true" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner">
+            <TextView
+                style="@style/LeftTitle"
+                android:text="@string/floating_window_permission"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/floating_window_permission"
+                android:layout_weight="1"
+                android:checked="true" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner">
+
+            <TextView
+                style="@style/LeftTitle"
+                android:text="@string/language"/>
+
+            <TextView
+                android:id="@+id/language"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner">
+
+            <TextView
+                style="@style/LeftTitle"
+                android:text="@string/timezone"/>
+
+            <TextView
+                android:id="@+id/timezone"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"  />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner">
+
+            <TextView
+                style="@style/LeftTitle"
+                android:text="@string/available_internal_storage"/>
+
+            <TextView
+                android:id="@+id/in_storage"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner">
+
+            <TextView
+                style="@style/LeftTitle"
+                android:text="@string/ip_address"/>
+
+            <TextView
+                android:id="@+id/ip_address"
+                android:gravity="center_vertical"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:layout_width="0dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner">
+
+            <TextView
+                style="@style/LeftTitle"
+                android:text="@string/wan_ip_address"/>
+
+            <TextView
+                android:id="@+id/wan_ip_address"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@drawable/rounded_corner">
+
+            <TextView
+                style="@style/LeftTitle"
+                android:text="@string/running_status"/>
+
+            <TextView
+                android:id="@+id/running_status"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>
