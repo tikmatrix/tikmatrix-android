@@ -135,6 +135,9 @@ public class AutomatorHttpServer extends NanoHTTPD {
 
     public void setAutomatorService(AutomatorService automatorService) {
         this.automatorService = automatorService;
-
     }
+    public AutomatorService getAutomatorService() {
+        return automatorService;
+    }
+    
 }

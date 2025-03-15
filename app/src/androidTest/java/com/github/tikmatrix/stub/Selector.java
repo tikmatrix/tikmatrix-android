@@ -560,4 +560,14 @@ public class Selector {
     public void setChildOrSibling(String[] _childOrSibling) {
         this._childOrSibling = _childOrSibling;
     }
+    public Selector text(String text) {
+        this._text = text;
+        this._mask |= Selector.MASK_TEXT;
+        return this;
+    }
+    public Selector textMatches(String textMatches) {
+        this._textMatches = textMatches;
+        this._mask |= Selector.MASK_TEXTMATCHES;
+        return this;
+    }
 }

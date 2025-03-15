@@ -40,5 +40,7 @@
   <string name="floating_window_permission">Floating Window Permission</string>
   <string name="language">Language:</string>
   <string name="timezone">Timezone:</string>
+  <string name="model">Model</string>
+  <string name="version">Version</string>
 
 </resources>

@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +39,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -56,12 +60,27 @@ public class MainActivity extends AppCompatActivity {
     private boolean isStubRunning = false;
     public static final String STUB_STATUS_ACTION = "com.github.tikmatrix.stub.STUB_RUNNING";
     private BroadcastReceiver mStubStatusReceiver;
+    private TextView tvCurrentTime;
+    private final Handler timeUpdateHandler = new Handler(Looper.getMainLooper());
+    private final Runnable timeUpdateRunnable = new Runnable() {
+        @Override
+        public void run() {
+            updateCurrentTime();
+            timeUpdateHandler.postDelayed(this, 1000); // 每秒更新一次
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("TikMatrix");
+
+        try {
+            String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            setTitle("TikMatrix v" + versionName);
+        } catch (Exception e) {
+            setTitle("TikMatrix");
+        }
 
         ((TextView) findViewById(R.id.product_name)).setText(Build.MANUFACTURER + " " + Build.MODEL);
         ((TextView) findViewById(R.id.android_system_version))
@@ -137,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "registerReceiver < 8");
             registerReceiver(mStubStatusReceiver, filter);
         }
+
+        tvCurrentTime = findViewById(R.id.current_time);
+        startTimeUpdates();
 
     }
 
@@ -249,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
                 + Formatter.formatFileSize(this, MemoryManager.getTotalExternalMemorySize()));
         checkNetworkAddress(null);
         testUiautomator();
+        startTimeUpdates(); // 重新开始时间更新
     }
 
     public String getEthernetIpAddress() {
@@ -326,5 +349,26 @@ public class MainActivity extends AppCompatActivity {
         if (mStubStatusReceiver != null) {
             unregisterReceiver(mStubStatusReceiver);
         }
+        stopTimeUpdates(); // 确保停止时间更新
+    }
+
+    private void updateCurrentTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        String currentTime = dateFormat.format(new Date());
+        tvCurrentTime.setText(currentTime);
+    }
+
+    private void startTimeUpdates() {
+        timeUpdateHandler.post(timeUpdateRunnable);
+    }
+
+    private void stopTimeUpdates() {
+        timeUpdateHandler.removeCallbacks(timeUpdateRunnable);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopTimeUpdates(); // 暂停时间更新
     }
 }
