@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">TikMatrix</string>
+  <string name="action_settings">设置</string>
+  <string name="monitor_service_ticker">UIAutomator 服务已启动</string>
+  <string name="monitor_service_title">TikMatrix</string>
+  <string name="monitor_service_text">服务正在运行！</string>
+  <string name="fast_input_label">快速输入法</string>
+  <string name="running_status">状态：</string>
+  <string name="develop_mode">开发者模式</string>
+  <string name="no_permission_tip">没有写入SD卡的权限</string>
+  <string name="available_internal_storage">存储空间：</string>
+  <string name="ip_address">IP地址：</string>
+  <string name="wan_ip_address">外网IP：</string>
+  <string name="available_sd_storage">可用SD卡存储：</string>
+  <string name="notification_permission">通知权限</string>
+  <string name="floating_window_permission">悬浮窗权限</string>
+  <string name="language">语言：</string>
+  <string name="timezone">时区：</string>
+  <string name="model">型号</string>
+  <string name="version">版本</string>
+  <string name="hardware_info">硬件信息</string>
+  <string name="network_info">网络信息</string>
+  <string name="permissions">权限设置</string>
+  <string name="cpu_info">处理器</string>
+  <string name="memory_info">内存</string>
+  <string name="screen_info">屏幕</string>
+  <string name="battery_info">电池</string>
+  <string name="network_type">网络类型</string>
+  <string name="mac_address">MAC地址</string>
+  <string name="agent_running">Agent 正在运行!</string>
+  <string name="agent_not_installed">Agent 未安装!</string>
+  <string name="agent_not_running">Agent 未启动!</string>
+  <string name="status_success">成功</string>
+  <string name="network_disconnected">未连接</string>
+  <string name="network_wifi">WiFi</string>
+  <string name="network_mobile">移动数据</string>
+  <string name="battery_charging">充电中</string>
+  <string name="not_available">无法获取</string>
+</resources> 

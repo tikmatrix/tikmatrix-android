@@ -96,6 +96,7 @@ public class Stub {
     public void testUIAutomatorStub() throws InterruptedException {
         Context context = InstrumentationRegistry.getInstrumentation().getContext();
         while (server.isAlive()) {
+            context.sendBroadcast(new Intent("com.github.tikmatrix.stub.STUB_RUNNING"));
             Thread.sleep(5000);
             registerWatchers();
             Log.i("registerWatchers");

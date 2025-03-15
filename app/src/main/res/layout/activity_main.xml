@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.github.tikmatrix.MainActivity"
-    android:padding="16dp"
+    android:padding="12dp"
     android:background="@color/background_color">
 
     <LinearLayout
@@ -15,210 +15,494 @@
         android:background="@drawable/rounded_corner"
         android:elevation="4dp">
 
-        <!-- 顶部信息区域 -->
+        <!-- 顶部区域 - 更紧凑 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:background="@drawable/rounded_corner"
-            android:layout_marginBottom="4dp">
+            android:layout_marginBottom="2dp">
 
+            <!-- 时间显示区 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/current_time"
-                style="@style/CenterTitle"
-                android:text=""
-                android:textSize="36sp"
-                android:textStyle="bold"
-                android:layout_marginTop="2dp" />
-            <TextView
-                android:id="@+id/timezone"
-                style="@style/CenterTitle"
-                android:text=""
-                android:textSize="16sp"
-                android:layout_marginTop="2dp" />
+                <TextView
+                    android:id="@+id/current_time"
+                    style="@style/CenterTitle"
+                    android:text=""
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/timezone"
+                    style="@style/CenterTitle"
+                    android:text=""
+                    android:textSize="12sp"
+                    android:layout_marginTop="0dp" />
+            </LinearLayout>
+
+            <!-- 状态显示区 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/status_card_background"
+                android:padding="4dp"
+                android:layout_margin="4dp"
+                android:elevation="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/running_status"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/font" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/status_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_status_inactive"
+                        android:contentDescription="状态图标" />
+
+                    <TextView
+                        android:id="@+id/running_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="2dp" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/divider_color"
-            android:layout_marginVertical="8dp" />
-        <!-- 状态信息区域 -->
+            android:layout_marginVertical="4dp" />
 
+        <!-- 系统基本信息区域 - 紧凑排列 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/rounded_corner">
-
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/running_status" />
-
-            <TextView
-                android:id="@+id/running_status"
-                android:gravity="center_vertical"
+            android:layout_marginBottom="2dp">
+            
+            <!-- 左侧信息列 -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/model" />
+                    <TextView
+                        android:id="@+id/product_name"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/version" />
+                    <TextView
+                        android:id="@+id/android_system_version"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+            </LinearLayout>
+            
+            <!-- 右侧信息列 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="2dp">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/language" />
+                    <TextView
+                        android:id="@+id/language"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/available_internal_storage" />
+                    <TextView
+                        android:id="@+id/in_storage"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-        <!-- 系统信息区域 -->
 
+        <!-- 硬件信息区域 - 新增 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hardware_info"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:background="@drawable/section_header_background"
+            android:padding="4dp"
+            android:gravity="center"
+            android:layout_marginBottom="2dp"/>
+            
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_corner">
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/model" />
-            <TextView
-                android:id="@+id/product_name"
-                android:gravity="center_vertical"
+            android:layout_marginBottom="2dp">
+            
+            <!-- 左侧硬件信息列 -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_corner">
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/version" />
-
-            <TextView
-                android:id="@+id/android_system_version"
-                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                
+                <!-- CPU信息 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/cpu_info" />
+                    <TextView
+                        android:id="@+id/cpu_info"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+                
+                <!-- 屏幕信息 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/screen_info" />
+                    <TextView
+                        android:id="@+id/screen_info"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+            </LinearLayout>
+            
+            <!-- 右侧硬件信息列 -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_corner">
-
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/language" />
-
-            <TextView
-                android:id="@+id/language"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_corner">
-
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/available_internal_storage" />
-
-            <TextView
-                android:id="@+id/in_storage"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="2dp">
+                
+                <!-- 内存信息 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/memory_info" />
+                    <TextView
+                        android:id="@+id/memory_info"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+                
+                <!-- 电池信息 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/battery_info" />
+                    <TextView
+                        android:id="@+id/battery_info"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <!-- 网络信息区域 -->
-
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/network_info"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:background="@drawable/section_header_background"
+            android:padding="4dp"
+            android:gravity="center"
+            android:layout_marginBottom="2dp"/>
+            
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_corner">
-
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/ip_address" />
-
-            <TextView
-                android:id="@+id/ip_address"
-                android:gravity="center_vertical"
-                android:layout_weight="2"
-                android:layout_height="match_parent"
-                android:layout_width="0dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_corner">
-
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/wan_ip_address" />
-
-            <TextView
-                android:id="@+id/wan_ip_address"
-                android:gravity="center_vertical"
+            android:layout_marginBottom="2dp">
+            
+            <!-- 左侧网络信息列 -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                
+                <!-- IP地址 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/ip_address" />
+                    <TextView
+                        android:id="@+id/ip_address"
+                        android:gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_width="0dp" />
+                </LinearLayout>
+                
+                <!-- 网络类型 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/network_type" />
+                    <TextView
+                        android:id="@+id/network_type"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+            </LinearLayout>
+            
+            <!-- 右侧网络信息列 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="2dp">
+                
+                <!-- WAN IP地址 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/wan_ip_address" />
+                    <TextView
+                        android:id="@+id/wan_ip_address"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+                
+                <!-- MAC地址 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner">
+                    <TextView
+                        style="@style/LeftTitle"
+                        android:textSize="14sp"
+                        android:layout_height="32dp"
+                        android:text="@string/mac_address" />
+                    <TextView
+                        android:id="@+id/mac_address"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:layout_weight="2" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
+        
         <!-- 权限设置区域 -->
-
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/permissions"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:background="@drawable/section_header_background"
+            android:padding="4dp"
+            android:gravity="center"
+            android:layout_marginBottom="2dp"/>
+            
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_corner">
-
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/notification_permission" />
-
-            <androidx.appcompat.widget.SwitchCompat
+            android:layout_marginBottom="2dp">
+            
+            <!-- 通知权限 -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/notification_permission"
                 android:layout_weight="1"
-                android:checked="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_corner">
-
-            <TextView
-                style="@style/LeftTitle"
-                android:text="@string/floating_window_permission" />
-
-            <androidx.appcompat.widget.SwitchCompat
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_corner">
+                <TextView
+                    style="@style/LeftTitle"
+                    android:textSize="14sp"
+                    android:layout_height="32dp"
+                    android:text="@string/notification_permission" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notification_permission"
+                    android:layout_weight="1"
+                    android:checked="true" />
+            </LinearLayout>
+            
+            <!-- 悬浮窗权限 -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/floating_window_permission"
                 android:layout_weight="1"
-                android:checked="true" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_corner">
+                <TextView
+                    style="@style/LeftTitle"
+                    android:textSize="14sp"
+                    android:layout_height="32dp"
+                    android:text="@string/floating_window_permission" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/floating_window_permission"
+                    android:layout_weight="1"
+                    android:checked="true" />
+            </LinearLayout>
         </LinearLayout>
-
-
     </LinearLayout>
 </ScrollView>

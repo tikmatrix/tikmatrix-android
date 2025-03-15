@@ -2,13 +2,19 @@ package com.github.tikmatrix;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,9 +27,12 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.FileProvider;
 
 import android.text.format.Formatter;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.github.tikmatrix.util.MemoryManager;
 import com.github.tikmatrix.util.OkhttpManager;
@@ -69,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
             timeUpdateHandler.postDelayed(this, 1000); // 每秒更新一次
         }
     };
+    private ImageView statusIcon;
+    private TextView cpuInfoTextView;
+    private TextView memoryInfoTextView;
+    private TextView screenInfoTextView;
+    private TextView batteryInfoTextView;
+    private TextView networkTypeTextView;
+    private TextView macAddressTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         tvInStorage = findViewById(R.id.in_storage);
         tvWanIp = findViewById(R.id.wan_ip_address);
         tvRunningStatus = findViewById(R.id.running_status);
+        statusIcon = findViewById(R.id.status_icon);
         String[] permissions = new String[0];
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             permissions = new String[] {
@@ -142,8 +159,9 @@ public class MainActivity extends AppCompatActivity {
                     if (isStubRunning) {
                         return;
                     }
-                    tvRunningStatus.setText("Success");
+                    tvRunningStatus.setText(R.string.status_success);
                     tvRunningStatus.setTextColor(Color.GREEN);
+                    statusIcon.setImageResource(R.drawable.ic_status_active);
                     isStubRunning = true;
                 }
             }
@@ -160,6 +178,13 @@ public class MainActivity extends AppCompatActivity {
         tvCurrentTime = findViewById(R.id.current_time);
         startTimeUpdates();
 
+        // 初始化新增的TextView引用
+        cpuInfoTextView = findViewById(R.id.cpu_info);
+        memoryInfoTextView = findViewById(R.id.memory_info);
+        screenInfoTextView = findViewById(R.id.screen_info);
+        batteryInfoTextView = findViewById(R.id.battery_info);
+        networkTypeTextView = findViewById(R.id.network_type);
+        macAddressTextView = findViewById(R.id.mac_address);
     }
 
     @Override
@@ -247,17 +272,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void testUiautomator() {
         if (isStubRunning) {
-            tvRunningStatus.setText("Agent is running!");
+            tvRunningStatus.setText(R.string.agent_running);
             tvRunningStatus.setTextColor(Color.GREEN);
+            statusIcon.setImageResource(R.drawable.ic_status_active);
             return;
         }
         boolean isInstalled = Permissons4App.isAppInstalled(MainActivity.this, "com.github.tikmatrix.test");
         if (!isInstalled) {
-            tvRunningStatus.setText("Agent not installed!");
+            tvRunningStatus.setText(R.string.agent_not_installed);
             tvRunningStatus.setTextColor(Color.RED);
+            statusIcon.setImageResource(R.drawable.ic_status_inactive);
         } else {
-            tvRunningStatus.setText("Agent not started!");
+            tvRunningStatus.setText(R.string.agent_not_running);
             tvRunningStatus.setTextColor(Color.RED);
+            statusIcon.setImageResource(R.drawable.ic_status_inactive);
         }
     }
 
@@ -272,6 +300,14 @@ public class MainActivity extends AppCompatActivity {
         checkNetworkAddress(null);
         testUiautomator();
         startTimeUpdates(); // 重新开始时间更新
+        
+        // 更新新增的设备信息
+        updateCpuInfo();
+        updateMemoryInfo();
+        updateScreenInfo();
+        updateBatteryInfo();
+        updateNetworkInfo();
+        updateMacAddress();
     }
 
     public String getEthernetIpAddress() {
@@ -370,5 +406,121 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         stopTimeUpdates(); // 暂停时间更新
+    }
+
+    // 获取CPU信息
+    private void updateCpuInfo() {
+        String cpuInfo = Build.HARDWARE + ", " + Runtime.getRuntime().availableProcessors() + " 核心";
+        cpuInfoTextView.setText(cpuInfo);
+    }
+
+    // 获取内存信息
+    private void updateMemoryInfo() {
+        ActivityManager actManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
+        actManager.getMemoryInfo(memInfo);
+        
+        long totalMemory = memInfo.totalMem;
+        long availMemory = memInfo.availMem;
+        
+        String memoryStr = Formatter.formatFileSize(this, availMemory) + " / " 
+                         + Formatter.formatFileSize(this, totalMemory);
+        memoryInfoTextView.setText(memoryStr);
+    }
+
+    // 获取屏幕信息
+    private void updateScreenInfo() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+        
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+        int density = (int) metrics.density;
+        
+        String screenInfo = width + "x" + height + ", " + density + "x";
+        screenInfoTextView.setText(screenInfo);
+    }
+
+    // 获取电池信息
+    private void updateBatteryInfo() {
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = registerReceiver(null, ifilter);
+        
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float batteryPct = level * 100 / (float) scale;
+        
+        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                             status == BatteryManager.BATTERY_STATUS_FULL;
+        
+        String batteryInfo = (int) batteryPct + "%" + (isCharging ? " (" + getString(R.string.battery_charging) + ")" : "");
+        batteryInfoTextView.setText(batteryInfo);
+    }
+
+    // 获取网络类型
+    private void updateNetworkInfo() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        
+        String networkType = getString(R.string.network_disconnected);
+        if (activeNetwork != null) {
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                networkType = getString(R.string.network_wifi);
+                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                if (wifiInfo != null && wifiInfo.getSSID() != null) {
+                    networkType += " (" + wifiInfo.getSSID().replace("\"", "") + ")";
+                }
+            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                networkType = getString(R.string.network_mobile) + " (" + activeNetwork.getSubtypeName() + ")";
+            } else {
+                networkType = activeNetwork.getTypeName();
+            }
+        }
+        
+        networkTypeTextView.setText(networkType);
+    }
+
+    // 获取MAC地址
+    private void updateMacAddress() {
+        String macAddress = getString(R.string.not_available);
+        
+        try {
+            WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            WifiInfo wInfo = wifiManager.getConnectionInfo();
+            macAddress = wInfo.getMacAddress();
+            
+            if (macAddress == null || macAddress.equals("02:00:00:00:00:00")) {
+                // Android 6.0及以上获取MAC地址的方法
+                try {
+                    List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+                    for (NetworkInterface nif : all) {
+                        if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+                        
+                        byte[] macBytes = nif.getHardwareAddress();
+                        if (macBytes == null) {
+                            macAddress = "未获取";
+                        } else {
+                            StringBuilder sb = new StringBuilder();
+                            for (byte b : macBytes) {
+                                sb.append(String.format("%02X:", b));
+                            }
+                            if (sb.length() > 0) {
+                                sb.deleteCharAt(sb.length() - 1);
+                            }
+                            macAddress = sb.toString();
+                        }
+                    }
+                } catch (Exception ex) {
+                    macAddress = "无法获取";
+                }
+            }
+        } catch (Exception e) {
+            macAddress = "无法获取";
+        }
+        
+        macAddressTextView.setText(macAddress);
     }
 }

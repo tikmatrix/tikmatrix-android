@@ -30,8 +30,8 @@
   <string name="monitor_service_text">service is running!</string>
   <string name="fast_input_label">FastInputIME</string>
   <string name="running_status">Status:</string>
-  <string name="develop_mode">Develop Mode</string>
-  <string name="no_permission_tip">No permission to write sd card</string>
+  <string name="develop_mode">Developer Mode</string>
+  <string name="no_permission_tip">No permission to write SD card</string>
   <string name="available_internal_storage">Storage:</string>
   <string name="ip_address">IP:</string>
   <string name="wan_ip_address">WAN IP:</string>
@@ -42,5 +42,23 @@
   <string name="timezone">Timezone:</string>
   <string name="model">Model</string>
   <string name="version">Version</string>
+  <string name="hardware_info">Hardware Info</string>
+  <string name="network_info">Network Info</string>
+  <string name="permissions">Permissions</string>
+  <string name="cpu_info">CPU</string>
+  <string name="memory_info">Memory</string>
+  <string name="screen_info">Screen</string>
+  <string name="battery_info">Battery</string>
+  <string name="network_type">Network Type</string>
+  <string name="mac_address">MAC Address</string>
+  <string name="agent_running">Agent is running!</string>
+  <string name="agent_not_installed">Agent not installed!</string>
+  <string name="agent_not_running">Agent not started!</string>
+  <string name="status_success">Success</string>
+  <string name="network_disconnected">Disconnected</string>
+  <string name="network_wifi">WiFi</string>
+  <string name="network_mobile">Mobile data</string>
+  <string name="battery_charging">Charging</string>
+  <string name="not_available">Not available</string>
 
 </resources>
