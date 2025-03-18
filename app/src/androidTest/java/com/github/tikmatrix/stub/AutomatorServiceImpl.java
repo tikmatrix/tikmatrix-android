@@ -184,6 +184,19 @@ public class AutomatorServiceImpl implements AutomatorService {
         AccessibilityEventListener.getInstance().toastMessage = null;
         return true;
     }
+    @Override
+    public boolean doubleClick(int x, int y) {
+        if (x < 0 || y < 0) {
+            return false;
+        }
+        // 执行两次点击
+        touchController.touchDown(x, y);
+        touchController.touchUp(x, y);
+        SystemClock.sleep(100); 
+        touchController.touchDown(x, y);
+        touchController.touchUp(x, y);
+        return true;
+    }
 
     /**
      * Perform a click at arbitrary coordinates specified by the user.

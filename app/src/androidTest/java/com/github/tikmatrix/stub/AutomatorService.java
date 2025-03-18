@@ -95,6 +95,8 @@ public interface AutomatorService {
      */
     DeviceInfo deviceInfo();
 
+        boolean doubleClick(int x, int y);
+
     /**
      * Perform a click at arbitrary coordinates specified by the user.
      *

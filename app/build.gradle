@@ -41,8 +41,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+        debug {
+            signingConfig signingConfigs.release  // 为调试版本使用相同的签名配置
+        }
     }
-
+    testBuildType "debug"
     android {
         lintOptions {
             abortOnError false
