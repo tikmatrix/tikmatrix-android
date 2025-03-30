@@ -164,6 +164,11 @@ public class Stub {
             Selector target=new Selector().text("Allow");
             automatorService.registerClickUiObjectWatcher("permission_allow_button", new Selector[] {conditions}, target);
         }
-            
+        //instagram Terms and Privacy Policy
+        if (!isWatcherRegistered("Terms and Privacy Policy")) {
+            Selector conditions=new Selector().text("Terms and Privacy Policy");
+            Selector target=new Selector().text("Continue");
+            automatorService.registerClickUiObjectWatcher("Terms and Privacy Policy", new Selector[] {conditions}, target);
+        }
     }
 }
