@@ -11,10 +11,10 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main repository
+      - name: Checkout 227 repository
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: 227
       - name: Build APK
         run: |
           chmod +x ./gradlew
