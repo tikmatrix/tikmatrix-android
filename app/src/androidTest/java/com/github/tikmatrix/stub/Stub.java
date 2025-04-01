@@ -129,8 +129,8 @@ public class Stub {
             automatorService.registerPressKeyskWatcher("MatchBack", new Selector[] {conditions}, keys);
         }
         //check if Match_v4 is registered
-        if (!isWatcherRegistered("Match_v4")) {
-            Selector conditions=new Selector().textMatches("Your friends on TikTok|Dismiss|Start watching|Don’t allow|Skip|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Choose how ads are shown");
+        if (!isWatcherRegistered("Match_v5")) {
+            Selector conditions=new Selector().textMatches("Your friends on TikTok|Dismiss|Start watching|Don’t allow|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Choose how ads are shown");
             Selector target=new Selector().textMatches("Done|Dismiss|Start watching|Don’t allow|Skip|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Select");
             automatorService.registerClickUiObjectWatcher("Match_v4", new Selector[] {conditions}, target);
         }
