@@ -124,15 +124,15 @@ public class Stub {
 
         //check if MatchBack is registered
         if (!isWatcherRegistered("MatchBack")) {
-            Selector conditions=new Selector().textMatches("Read status|Post view history turned on|Profile view history turned on|View your friends’ posts|Chat with more people|Feed accessibility tool is on|See who is online now|Posts are from followers that you follow back|Follow your friends");
+            Selector conditions=new Selector().textMatches("Read status|Post view history turned on|Profile view history turned on|View your friends’ posts|Chat with more people|Feed accessibility tool is on|See who is online now|Posts are from followers that you follow back|Follow your friends|Let's do a quick security checkup|Create your TikTok avatar");
             String[] keys={"back"};
             automatorService.registerPressKeyskWatcher("MatchBack", new Selector[] {conditions}, keys);
         }
-        //check if Match_v4 is registered
+        //check if Match_v5 is registered
         if (!isWatcherRegistered("Match_v5")) {
             Selector conditions=new Selector().textMatches("Your friends on TikTok|Dismiss|Start watching|Don’t allow|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Choose how ads are shown");
             Selector target=new Selector().textMatches("Done|Dismiss|Start watching|Don’t allow|Skip|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Select");
-            automatorService.registerClickUiObjectWatcher("Match_v4", new Selector[] {conditions}, target);
+            automatorService.registerClickUiObjectWatcher("Match_v5", new Selector[] {conditions}, target);
         }
         //check if MatchCancel is registered
         if (!isWatcherRegistered("MatchCancel")) {
@@ -165,10 +165,10 @@ public class Stub {
             automatorService.registerClickUiObjectWatcher("permission_allow_button", new Selector[] {conditions}, target);
         }
         //instagram Terms and Privacy Policy
-        if (!isWatcherRegistered("Terms and Privacy Policy")) {
+        if (!isWatcherRegistered("Terms")) {
             Selector conditions=new Selector().text("Terms and Privacy Policy");
             Selector target=new Selector().text("Continue");
-            automatorService.registerClickUiObjectWatcher("Terms and Privacy Policy", new Selector[] {conditions}, target);
+            automatorService.registerClickUiObjectWatcher("Terms", new Selector[] {conditions}, target);
         }
     }
 }
