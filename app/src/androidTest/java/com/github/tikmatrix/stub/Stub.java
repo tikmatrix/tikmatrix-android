@@ -140,13 +140,7 @@ public class Stub {
                     "Done|Dismiss|Start watching|Don’t allow|Skip|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Select|Save|Close app");
             automatorService.registerClickUiObjectWatcher("Match_v5", new Selector[] { conditions }, target);
         }
-        // check if MatchCancel is registered
-        if (!isWatcherRegistered("MatchCancel")) {
-            Selector conditions = new Selector().textMatches(
-                    "Keep editing your unposted video\\?|Your support means a lot to creators|Keep|How do you feel about the video you just watched\\?|Authorize|How do you feel about the video you just watched\\?");
-            Selector target = new Selector().text("Cancel");
-            automatorService.registerClickUiObjectWatcher("MatchCancel", new Selector[] { conditions }, target);
-        }
+
         // check if MatchOk is registered
         if (!isWatcherRegistered("MatchOk")) {
             Selector conditions = new Selector()
@@ -160,12 +154,7 @@ public class Stub {
             Selector target = new Selector().text("Confirm");
             automatorService.registerClickUiObjectWatcher("MatchConfirm", new Selector[] { conditions }, target);
         }
-        // check if Discard is registered
-        if (!isWatcherRegistered("Discard")) {
-            Selector conditions = new Selector().text("Edit");
-            Selector target = new Selector().text("Discard");
-            automatorService.registerClickUiObjectWatcher("Discard", new Selector[] { conditions }, target);
-        }
+
         // check if permission_allow_button is registered
         if (!isWatcherRegistered("permission_allow_button")) {
             Selector conditions = new Selector().text("Allow");
