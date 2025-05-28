@@ -32,14 +32,14 @@ jobs:
           r2-bucket: tikmatrix
           source-dir: app/build/apk/
           destination-dir: ./
-      - name: Update Version
-        run: |
-          TAG_NAME="${GITHUB_REF#refs/tags/}"
-          curl -X PUT https://pro.api.tikmatrix.com/ci/update_core_version \
-          -H "Content-Type: application/json" \
-          -H "Authorization: Bearer ${{ secrets.API_KEY }}" \
-          -d '{
-            "apk_version": "'"${TAG_NAME}"'",
-            "test_apk_version": "'"${TAG_NAME}"'"
-          }'
+      # - name: Update Version
+      #   run: |
+      #     TAG_NAME="${GITHUB_REF#refs/tags/}"
+      #     curl -X PUT https://pro.api.tikmatrix.com/ci/update_core_version \
+      #     -H "Content-Type: application/json" \
+      #     -H "Authorization: Bearer ${{ secrets.API_KEY }}" \
+      #     -d '{
+      #       "apk_version": "'"${TAG_NAME}"'",
+      #       "test_apk_version": "'"${TAG_NAME}"'"
+      #     }'
 
