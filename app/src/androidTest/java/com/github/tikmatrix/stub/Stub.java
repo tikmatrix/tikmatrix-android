@@ -141,11 +141,11 @@ public class Stub {
             automatorService.registerClickUiObjectWatcher("Match_v5", new Selector[] { conditions }, target);
         }
         // check if MatchCancel is registered
-        if (!isWatcherRegistered("MatchCancel_v1")) {
+        if (!isWatcherRegistered("MatchCancel")) {
             Selector conditions = new Selector().textMatches(
-                    "Keep editing your unposted video?|Your support means a lot to creators|Keep|How do you feel about the video you just watched?|Authorize|How do you feel about the video you just watched?");
+                    "Keep editing your unposted video\\?|Your support means a lot to creators|Keep|How do you feel about the video you just watched\\?|Authorize|How do you feel about the video you just watched\\?");
             Selector target = new Selector().text("Cancel");
-            automatorService.registerClickUiObjectWatcher("MatchCancel_v1", new Selector[] { conditions }, target);
+            automatorService.registerClickUiObjectWatcher("MatchCancel", new Selector[] { conditions }, target);
         }
         // check if MatchOk is registered
         if (!isWatcherRegistered("MatchOk")) {
