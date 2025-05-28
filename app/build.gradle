@@ -22,8 +22,8 @@ android {
         applicationId "com.github.tikmatrix"
         minSdkVersion 21
         targetSdkVersion 34
-        versionName "0.0.2"
-        versionCode 2025002
+        versionName "0.0.3"
+        versionCode 2025003
     }
 
     signingConfigs {
