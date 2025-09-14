@@ -135,9 +135,9 @@ public class Stub {
         // check if Match_v5 is registered
         if (!isWatcherRegistered("Match_v5")) {
             Selector conditions = new Selector().textMatches(
-                    "Your friends on TikTok|Dismiss|Start watching|Don’t allow|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Choose how ads are shown|Choose your interests|Viewer history turned on|TikTok isn't responding");
+                    "Your friends on TikTok|Dismiss|Start watching|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Choose how ads are shown|Choose your interests|Viewer history turned on|TikTok isn't responding");
             Selector target = new Selector().textMatches(
-                    "Done|Dismiss|Start watching|Don’t allow|Skip|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Select|Save|Close app");
+                    "Done|Dismiss|Start watching|Skip|Continue anyway|Post anyway|Not now|Agree and continue|Accept|Got it|Remind me later|Select|Save|Close app");
             automatorService.registerClickUiObjectWatcher("Match_v5", new Selector[] { conditions }, target);
         }
 

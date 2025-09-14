@@ -37,4 +37,6 @@
   <string name="network_mobile">移动数据</string>
   <string name="battery_charging">充电中</string>
   <string name="not_available">无法获取</string>
+  <string name="cores">核心</string>
+  <string name="unable_to_get">未获取</string>
 </resources> 

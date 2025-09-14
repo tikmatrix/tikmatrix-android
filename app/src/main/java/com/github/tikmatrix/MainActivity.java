@@ -185,6 +185,9 @@ public class MainActivity extends AppCompatActivity {
         batteryInfoTextView = findViewById(R.id.battery_info);
         networkTypeTextView = findViewById(R.id.network_type);
         macAddressTextView = findViewById(R.id.mac_address);
+
+        // 只在启动时获取网络地址
+        checkNetworkAddress(null);
     }
 
     @Override
@@ -297,7 +300,6 @@ public class MainActivity extends AppCompatActivity {
         switchFloatingWindow.setChecked(isFloatingWindowPermissionGranted());
         tvInStorage.setText(Formatter.formatFileSize(this, MemoryManager.getAvailableInternalMemorySize()) + "/"
                 + Formatter.formatFileSize(this, MemoryManager.getTotalExternalMemorySize()));
-        checkNetworkAddress(null);
         testUiautomator();
         startTimeUpdates(); // 重新开始时间更新
         
@@ -410,7 +412,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 获取CPU信息
     private void updateCpuInfo() {
-        String cpuInfo = Build.HARDWARE + ", " + Runtime.getRuntime().availableProcessors() + " 核心";
+        String cpuInfo = Build.HARDWARE + ", " + Runtime.getRuntime().availableProcessors() + " " + getString(R.string.cores);
         cpuInfoTextView.setText(cpuInfo);
     }
 
@@ -501,7 +503,7 @@ public class MainActivity extends AppCompatActivity {
                         
                         byte[] macBytes = nif.getHardwareAddress();
                         if (macBytes == null) {
-                            macAddress = "未获取";
+                            macAddress = getString(R.string.unable_to_get);
                         } else {
                             StringBuilder sb = new StringBuilder();
                             for (byte b : macBytes) {
@@ -514,11 +516,11 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 } catch (Exception ex) {
-                    macAddress = "无法获取";
+                    macAddress = getString(R.string.not_available);
                 }
             }
         } catch (Exception e) {
-            macAddress = "无法获取";
+            macAddress = getString(R.string.not_available);
         }
         
         macAddressTextView.setText(macAddress);

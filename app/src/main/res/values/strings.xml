@@ -60,5 +60,7 @@
   <string name="network_mobile">Mobile data</string>
   <string name="battery_charging">Charging</string>
   <string name="not_available">Not available</string>
+  <string name="cores">cores</string>
+  <string name="unable_to_get">Unable to get</string>
 
 </resources>
