@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is building Release 🚀
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 permissions:
   contents: write
 jobs:
@@ -24,7 +24,7 @@ jobs:
           mv app/build/outputs/apk/debug/app-debug.apk app/build/apk/com.github.tikmatrix.apk
           mv app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk app/build/apk/com.github.tikmatrix.test.apk
       - name: Upload APK
-        uses: ryand56/r2-upload-action@v1.2.3
+        uses: ryand56/r2-upload-action@v1.4
         with:
           r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
           r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -42,4 +42,3 @@ jobs:
       #       "apk_version": "'"${TAG_NAME}"'",
       #       "test_apk_version": "'"${TAG_NAME}"'"
       #     }'
-
