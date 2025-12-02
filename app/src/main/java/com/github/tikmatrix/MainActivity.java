@@ -341,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
         textViewIP.setText(ipAddress);
         textViewIP.setTextColor(Color.BLUE);
 
-        Request request = new Request.Builder().url("https://pro.api.tikmatrix.com/front-api/ip")
+        Request request = new Request.Builder().url("https://pro.api.niostack.com/front-api/ip")
                 .get()
                 .build();
         okhttpManager.newCall(request, new Callback() {
