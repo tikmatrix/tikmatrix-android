@@ -11,15 +11,15 @@ that we can just write PC side script to write UIAutomator tests.
 
 # Github Actions
 
-## R2_ACCOUNT_ID
+## R2_ACCOUNT_ID_NIO
 
 Your Cloudflare account ID.
 
-## R2_ACCESS_KEY_ID
+## R2_ACCESS_KEY_ID_NIO
 
 Your Cloudflare R2 bucket access key ID.
 
-## R2_SECRET_ACCESS_KEY
+## R2_SECRET_ACCESS_KEY_NIO
 
 Your Cloudflare R2 bucket secret access key.
 
